@@ -152,40 +152,36 @@ source ~/ydlidar_ros2_driver/install/setup.bash
 ## Build & Run
 
 1. Resolve Dependencies
-
-  ```
-  rosdep install -i --from-path src --rosdistro humble -y
-  ```
+    ```
+    rosdep install -i --from-path src --rosdistro humble -y
+    ```
 
 1. Run colcon build in workspace root
-   
-  ```
-  colcon build --symlink-install
-  ```
+    ```
+    colcon build --symlink-install
+    ```
 
 1. Source the setup file. *Source the other packages too, or add them to ~/.bashrc*
-   
-  ```
-  source install/setup.bash
-  ```
+    ```
+    source install/setup.bash
+    ```
 
 1. Connect lidar and real-sense camera with usb cables.
 
 1. Run real-sense node in new terminal.
-  ```
-  ros2 launch realsense2_camera rs_launch.py pointcloud.enable:=true
-  ```
+    ```
+    ros2 launch realsense2_camera rs_launch.py pointcloud.enable:=true
+    ```
 
 1. Run lidar node in new terminal. ENSURE the `port` parameter in the `params` file is correct.
-  ```
-  ros2 launch ydlidar_ros2_driver ydlidar_launch.py 
-  ```
+    ```
+    ros2 launch ydlidar_ros2_driver ydlidar_launch.py 
+    ```
    
 1. Run ros2 launch
-   
-  ```
-  ros2 launch main_package launch_sim.launch.py
-  ```
+    ```
+    ros2 launch main_package launch_sim.launch.py
+    ```
 
 ## VS Code Preferences (User JSON)
 
