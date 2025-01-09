@@ -51,17 +51,7 @@ Restart to take effect
 ```
 sudo apt update
 sudo apt install python3-colcon-common-extensions
-sudo apt-get install ros-humble-ros-gz
-sudo apt install ros-humble-image-transport-plugins
-sudo apt install ros-humble-joint-state-publisher-gui
 sudo apt-get install ros-humble-rviz2 ros-humble-tf2-ros ros-humble-tf2-tools
-sudo apt install v4l-utils ros-humble-v4l2-camera
-sudo apt install ros-humble-twist-mux
-sudo apt install ros-humble-slam-toolbox
-sudo apt install ros-humble-navigation2 ros-humble-nav2-bringup
-sudo apt install ros-humble-ros-gz
-sudo apt install ros-humble-gazebo-ros-pkgs
-sudo apt install ros-humble-ros2-control ros-humble-ros2-controllers ros-humble-gazebo-ros2-control
 ```
 
 [**RealSense SDK**](https://github.com/IntelRealSense/librealsense/blob/master/doc/distribution_linux.md)
@@ -118,6 +108,34 @@ sudo apt install ros-humble-realsense2-*
     source ~/ydlidar_ros2_driver/install/setup.bash
     ```
 
+1. Configure YDLidar parameters. Navigate to `~/ydlidar_ros2_driver/params/ydlidar.yaml` refer to [DATASET](https://github.com/YDLIDAR/YDLidar-SDK/blob/master/doc/Dataset.md), for `X2/X2L` parameters are as below.
+    ```
+    ydlidar_ros2_driver_node:
+      ros__parameters:
+        port: /dev/serial/by-path/pci-0000:00:0c.0-usb-0:2:1.0-port0
+        frame_id: laser_frame
+        ignore_array: ""
+        baudrate: 115200
+        lidar_type: 1
+        device_type: 0
+        sample_rate: 3
+        intensity_bit: 0
+        abnormal_check_count: 4
+        fixed_resolution: true
+        reversion: true
+        inverted: true
+        auto_reconnect: true
+        isSingleChannel: true
+        intensity: false
+        support_motor_dtr: false
+        angle_max: 180.0
+        angle_min: -180.0
+        range_max: 64.0
+        range_min: 0.01
+        frequency: 10.0
+        invalid_range_is_inf: false
+    ```
+
 
 ## `~/.bashrc` file
 
@@ -141,21 +159,33 @@ source ~/ydlidar_ros2_driver/install/setup.bash
 
 1. Run colcon build in workspace root
    
-   ```
-   colcon build --symlink-install
-   ```
+  ```
+  colcon build --symlink-install
+  ```
 
 1. Source the setup file. *Source the other packages too, or add them to ~/.bashrc*
    
-   ```
-   source install/setup.bash
-   ```
+  ```
+  source install/setup.bash
+  ```
+
+1. Connect lidar and real-sense camera with usb cables.
+
+1. Run real-sense node in new terminal.
+  ```
+  ros2 launch realsense2_camera rs_launch.py pointcloud.enable:=true
+  ```
+
+1. Run lidar node in new terminal. ENSURE the `port` parameter in the `params` file is correct.
+  ```
+  ros2 launch ydlidar_ros2_driver ydlidar_launch.py 
+  ```
    
 1. Run ros2 launch
    
-   ```
-   ros2 launch main_package launch_sim.launch.py
-   ```
+  ```
+  ros2 launch main_package launch_sim.launch.py
+  ```
 
 ## VS Code Preferences (User JSON)
 

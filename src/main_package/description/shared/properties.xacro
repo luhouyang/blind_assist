@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+
+    <xacro:property name="lidar_radius" value="0.030" />
+    <xacro:property name="lidar_length" value="0.068" />
+
+    <xacro:property name="lidar_weight" value="0.400" />
+
+
+    <xacro:property name="intel_camera_length" value="0.026" />
+    <xacro:property name="intel_camera_width" value="0.124" />
+    <xacro:property name="intel_camera_height" value="0.029" />
+
+    <xacro:property name="intel_camera_and_fixture_weight" value="0.380" />
+
+    <xacro:property name="intel_camera_fixture_radius" value="0.0125" />
+    <xacro:property name="intel_camera_fixture_length" value="0.073" />
+
+
+</robot>
